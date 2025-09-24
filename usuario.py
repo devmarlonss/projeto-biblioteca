@@ -21,5 +21,9 @@ class Usuario:
         return self.__senha
     
     @property
+    def livros_emprestados(self):
+        return self.__livros_emprestados
+    
+    @property
     def historico_livros(self):
-        self.__historico_livros
+        return self.__historico_livros
