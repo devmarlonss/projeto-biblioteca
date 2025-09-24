@@ -9,6 +9,10 @@ class Biblioteca:
         self.usuarios = []
         self.livros = []
 
+    def exibir_usuarios(self):
+        for u in self.usuarios:
+            print(f"Nome: {u.nome}\nCPF: {u.cpf}\n")
+
     @staticmethod
     def verificar_cpf(cpf):
         """"Verifica se o CPF é válido"""
