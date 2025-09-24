@@ -9,6 +9,14 @@ class Biblioteca:
         self.usuarios = []
         self.livros = []
 
+    def adicionar_usuario(self, nome, cpf, senha):
+        if (self.verificar_cpf(cpf)):
+            if (not self.buscar_usuario(cpf, show=False)):
+                self.usuarios.append(Usuario(nome, cpf, senha))
+                return True
+            return "USUÁRIO JÁ CADASTRADO!"
+        return "CPF INVÁLIDO!"
+
     def remover_usuario(self, cpf):
         for u in self.usuarios:
             if u.cpf == cpf:
