@@ -8,3 +8,8 @@ class Biblioteca:
     def __init__(self):
         self.usuarios = []
         self.livros = []
+
+    @staticmethod
+    def verificar_cpf(cpf):
+        """"Verifica se o CPF é válido"""
+        return (cpf.isdigit() and len(cpf) == 11)
