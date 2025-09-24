@@ -9,6 +9,13 @@ class Biblioteca:
         self.usuarios = []
         self.livros = []
 
+    def remover_usuario(self, cpf):
+        for u in self.usuarios:
+            if u.cpf == cpf:
+                self.usuarios.remove(u)
+                return True
+        return False
+
     def buscar_usuario(self, cpf, show=True):
         for u in self.usuarios:
             if u.cpf == cpf:
