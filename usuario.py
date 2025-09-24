@@ -5,6 +5,7 @@ class Usuario:
         self.__nome = nome
         self.__cpf = cpf
         self.__senha = senha
+        self.__livros_emprestados = []
         self.__historico_livros = []
 
     @property
