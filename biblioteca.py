@@ -9,6 +9,14 @@ class Biblioteca:
         self.usuarios = []
         self.livros = []
 
+    def buscar_usuario(self, cpf, show=True):
+        for u in self.usuarios:
+            if u.cpf == cpf:
+                if (show):
+                    return (u.nome, u.cpf)
+                return True
+        return False
+
     def exibir_usuarios(self):
         for u in self.usuarios:
             print(f"Nome: {u.nome}\nCPF: {u.cpf}\n")
