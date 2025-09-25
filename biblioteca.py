@@ -43,6 +43,10 @@ class Biblioteca:
                     return (l.titulo, l.autor, l.ano, l.genero, l.disponivel)
                 return True
         return False
+    
+    def exibir_livros(self):
+        for l in self.livros:
+            print(f"Título: {l.titulo} | Autor: {l.autor} | Ano: {l.ano} | Gênero: {l.genero} | Disponível: {"Sim" if l.disponivel else "Não"}")
 
     @staticmethod
     def verificar_cpf(cpf):
