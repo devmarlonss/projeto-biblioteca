@@ -36,6 +36,13 @@ class Biblioteca:
         for u in self.usuarios:
             print(f"Nome: {u.nome}\nCPF: {u.cpf}\n")
 
+    def adicionar_livro(self, titulo, autor, ano, genero):
+        if (not self.buscar_livro(titulo, show=False)):
+            livro = Livro(titulo, ano, autor, genero)
+            self.livros.append(livro)
+            return True
+        return "LIVRO JÁ CADASTRADO!"
+
     def remover_livro(self, titulo):
         for l in self.livros:
             if (l.titulo == titulo):
@@ -52,8 +59,10 @@ class Biblioteca:
         return False
     
     def exibir_livros(self):
-        for l in self.livros:
-            print(f"Título: {l.titulo} | Autor: {l.autor} | Ano: {l.ano} | Gênero: {l.genero} | Disponível: {"Sim" if l.disponivel else "Não"}")
+        if (self.livros):
+            for l in self.livros:
+                print(f"Título: {l.titulo} | Autor: {l.autor} | Ano: {l.ano} | Gênero: {l.genero} | Disponível: {"Sim" if l.disponivel else "Não"}")
+        print("\n Nenhum livro cadastrado!")
 
     @staticmethod
     def verificar_cpf(cpf):
