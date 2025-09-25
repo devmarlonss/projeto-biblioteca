@@ -36,6 +36,13 @@ class Biblioteca:
         for u in self.usuarios:
             print(f"Nome: {u.nome}\nCPF: {u.cpf}\n")
 
+    def remover_livro(self, titulo):
+        for l in self.livros:
+            if (l.titulo == titulo):
+                self.livros.remove(l)
+                return True
+        return False
+
     def buscar_livro(self, titulo, show=True):
         for l in self.livros:
             if (l.titulo == titulo):
