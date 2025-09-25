@@ -19,14 +19,14 @@ class Biblioteca:
 
     def remover_usuario(self, cpf):
         for u in self.usuarios:
-            if u.cpf == cpf:
+            if (u.cpf == cpf):
                 self.usuarios.remove(u)
                 return True
         return False
 
     def buscar_usuario(self, cpf, show=True):
         for u in self.usuarios:
-            if u.cpf == cpf:
+            if (u.cpf == cpf):
                 if (show):
                     return (u.nome, u.cpf)
                 return True
@@ -35,6 +35,14 @@ class Biblioteca:
     def exibir_usuarios(self):
         for u in self.usuarios:
             print(f"Nome: {u.nome}\nCPF: {u.cpf}\n")
+
+    def buscar_livro(self, titulo, show=True):
+        for l in self.livros:
+            if (l.titulo == titulo):
+                if (show):
+                    return (l.titulo, l.autor, l.ano, l.genero, l.disponivel)
+                return True
+        return False
 
     @staticmethod
     def verificar_cpf(cpf):
