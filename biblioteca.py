@@ -142,7 +142,7 @@ class Biblioteca:
 
             historico_livros = []
             for h in u["historico_livros"]:
-                historico_livros.append(Livro.dict_livro(h[0]), h[1])
+                historico_livros.append([Livro.dict_livro(h[0]), h[1]])
             usuario.historico_livros = historico_livros
 
             self.usuarios.append(usuario)
