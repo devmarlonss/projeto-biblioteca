@@ -19,7 +19,9 @@ def menu():
         8 - Exibir Livros
         9 - Emprestar Livro
         10 - Devolver Livro
-        11 - Sair
+        11 - Ver livros emprestados ao usuário      
+        12 - Ver histórico do usuário
+        13 - Sair
         #====================================#
         """)
         
@@ -97,7 +99,7 @@ def menu():
             resultado = biblioteca.devolver_livros(titulo, cpf, senha)
             print(f"Livro devolvido com sucesso!" if resultado else resultado)
         
-        elif opition == "11":
+        elif opition == "13":
             print("Saindo do programa...")
             break
         else:
