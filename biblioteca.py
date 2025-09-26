@@ -140,6 +140,11 @@ class Biblioteca:
         for l in self.livros:
             dados.append(Livro.livro_dict(l))
         Dados.salvar_dados("livros.json", dados)
+
+    def carregar_livros(self):
+        livros = Dados.carregar_dados("livros.json")
+        for l in livros:
+            self.livros.append(Livro.dict_livro(l))
     
     @staticmethod
     def verificar_senha(usuario, senha):
