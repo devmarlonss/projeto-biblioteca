@@ -3,8 +3,6 @@ from livro import Livro
 from dados import Dados
 
 class Biblioteca:
-    _arquivo = "biblioteca"
-
     def __init__(self):
         self.usuarios = []
         self.livros = []
@@ -33,8 +31,11 @@ class Biblioteca:
         return False
 
     def exibir_usuarios(self):
-        for u in self.usuarios:
-            print(f"Nome: {u.nome}\nCPF: {u.cpf}\n")
+        if (self.usuarios):
+            for u in self.usuarios:
+                print(f"Nome: {u.nome}\nCPF: {u.cpf}\n")
+        else:
+            print("\n Nenhum livro cadastrado!")
 
     def adicionar_livro(self, titulo, autor, ano, genero):
         if (not self.buscar_livro(titulo, show=False)):
@@ -62,7 +63,8 @@ class Biblioteca:
         if (self.livros):
             for l in self.livros:
                 print(f"Título: {l.titulo} | Autor: {l.autor} | Ano: {l.ano} | Gênero: {l.genero} | Disponível: {"Sim" if l.disponivel else "Não"}")
-        print("\n Nenhum livro cadastrado!")
+        else:
+            print("\n Nenhum livro cadastrado!")
 
     @staticmethod
     def verificar_cpf(cpf):
