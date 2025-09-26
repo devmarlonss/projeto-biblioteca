@@ -11,7 +11,7 @@ def menu():
         1 - Adicionar Usuário 
         2 - Remover Usuário
         3 - Buscar Usuário
-        4 - Exibir Usuário
+        4 - Exibir Usuários
         5 - Adicionar Livro
         6 - Remover Livro
         7 - Buscar Livro

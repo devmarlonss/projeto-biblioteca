@@ -36,7 +36,7 @@ class Biblioteca:
     def exibir_usuarios(self):
         if (self.usuarios):
             for p, u in enumerate(self.usuarios):
-                print(f"{p+1} | Nome: {u.nome} | CPF: {u.cpf}\n")
+                print(f"{p+1} | Nome: {u.nome} | CPF: {u.cpf}")
         else:
             print("\n Nenhum usuário cadastrado!")
 
