@@ -1,3 +1,4 @@
+from datetime import date
 from usuario import Usuario
 from livro import Livro
 from dados import Dados
@@ -76,7 +77,7 @@ class Biblioteca:
                 usuario = self.buscar_usuario(cpf, obj=True)
                 if self.verificar_senha(usuario, senha):
                     usuario.livros_emprestados.append(livro)
-                    usuario.hitorico_livros.append(livro)    
+                    usuario.hitorico_livros.append([livro, date.now()])    
                     livro.alterar_disponibilidade()
                     return True
                 return "Senha incorreta!"
@@ -100,6 +101,14 @@ class Biblioteca:
             print(f"USUÁRIO: {usuario.nome}")
             for p, l in enumerate(usuario.livros_emprestados):
                 print(f"{p+1} - {l.titulo}")
+        return "CPF Inválido!"
+    
+    def ver_historico(self, cpf):
+        if (self.verificar_cpf(cpf)):
+            usuario = self.buscar_usuario(cpf, obj=True)
+            print(f"USUÁRIO: {usuario.nome}")
+            for p, l in enumerate(usuario.historico_livros):
+                print(f"{p+1}° - {l[0].titulo} - {l[1]}")
         return "CPF Inválido!"
     
     @staticmethod
