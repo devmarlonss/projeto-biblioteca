@@ -24,9 +24,11 @@ class Biblioteca:
                 return True
         return False
 
-    def buscar_usuario(self, cpf, show=True):
+    def buscar_usuario(self, cpf, show=True, obj= False):
         for u in self.usuarios:
             if (u.cpf == cpf):
+                if obj:
+                    return u
                 if (show):
                     return (u.nome, u.cpf)
                 return True
@@ -50,9 +52,11 @@ class Biblioteca:
                 return True
         return False
 
-    def buscar_livro(self, titulo, show=True):
+    def buscar_livro(self, titulo, show=True, obj=False):
         for l in self.livros:
             if (l.titulo == titulo):
+                if obj:
+                    return l
                 if (show):
                     return (l.titulo, l.autor, l.ano, l.genero, l.disponivel)
                 return True
@@ -61,10 +65,39 @@ class Biblioteca:
     def exibir_livros(self):
         if (self.livros):
             for l in self.livros:
-                print(f"Título: {l.titulo} | Autor: {l.autor} | Ano: {l.ano} | Gênero: {l.genero} | Disponível: {"Sim" if l.disponivel else "Não"}")
+                print(f"Título: {l.titulo} | Autor: {l.autor} | Ano: {l.ano} | Gênero: {l.genero} | Disponível: {'Sim' if l.disponivel else 'Não'}")
         print("\n Nenhum livro cadastrado!")
 
+    def emprestar_livros(self, titulo, cpf, senha):
+        livro = self.buscar_livro(titulo, obj=True)
+        usuario = self.buscar_usuario(cpf, obj=True)
+        if livro.disponivel:
+            if self.verificar_cpf(cpf):
+                if self.verificar_senha(usuario, senha):
+                    usuario.livros_emprestados.append(livro)
+                    usuario.hitorico_livros.append(livro)    
+                    livro.alterar_disponibilidade()
+                    return True
+                return "Senha incorreta!"
+            return  "CPF inválido!"
+        return "Livro indisponível!"
+
+    def devolver_livros(self, titulo, cpf, senha):
+        livro = self.buscar_livro(titulo, obj=True)
+        usuario = self.buscar_usuario(cpf, obj=True)
+        if self.verificar_cpf(cpf):
+            if self.verificar_senha(usuario, senha):
+                usuario.livros_emprestados.remove(livro)   
+                livro.alterar_disponibilidade()
+                return True
+            return "Senha incorreta!"
+        return  "CPF inválido!"
+
+    @staticmethod
+    def verificar_senha(usuario, senha):
+        return usuario.senha == senha
+    
     @staticmethod
     def verificar_cpf(cpf):
-        """"Verifica se o CPF é válido"""
+        """Verifica se o CPF é válido"""
         return (cpf.isdigit() and len(cpf) == 11)
