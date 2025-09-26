@@ -25,3 +25,18 @@ class Usuario:
     @property
     def historico_livros(self):
         return self.__historico_livros
+    
+    def usuario_dict(self):
+        return {
+            "nome": self.nome,
+            "cpf": self.cpf,
+            "senha": self.senha,
+            "livros_emprestados": self.livros_emprestados,
+            "historico_livros": self.historico_livros
+        }
+    
+    @staticmethod
+    def dict_usuario(usuario):
+        """Método para transformar um dicionário em objeto"""
+        return Usuario(usuario["nome"], usuario["cpf"], usuario["senha"], usuario["livros_emprestados"], usuario["historico_livros"])
+    
