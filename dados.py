@@ -9,6 +9,9 @@ class Dados:
     
     @staticmethod
     def carregar_dados(arquivo):
-        """Carrega dados de um arquivo JSON, se existir."""
-        with open(arquivo, "r", encoding="utf-8") as arq:
-            return json.load(arquivo)
+        """Carrega dados de um arquivo JSON."""
+        try:
+            with open(arquivo, "r", encoding="utf-8") as arq:
+                return json.load(arq)
+        except FileNotFoundError:
+            return {}
