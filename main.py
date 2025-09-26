@@ -47,7 +47,7 @@ def menu():
             if not resultado:
                 print("Usuário não encontrado!")
             else:
-                print(f"nome: {resultado[0]} cpf: {resultado[1]}")
+                print(f"Nome: {resultado[0]} | CPF: {resultado[1]}")
 
         elif opition == "4":
             print("\n===📑Exibir Usuários📑===")
