@@ -133,12 +133,38 @@ class Biblioteca:
     def carregar_usuarios(self):
         usuarios = Dados.carregar_dados("usuarios.json")
         for u in usuarios:
-            self.usuarios.append(Usuario.dict_usuario(u))
+            usuario = Usuario(u["nome"], u["cpf"], u["senha"])
+
+            livros_emprestados = []
+            for l in u["livros_emprestados"]:
+                livros_emprestados.append(Livro.dict_livro(l))
+            usuario.livros_emprestados = livros_emprestados
+
+            historico_livros = []
+            for h in u["historico_livros"]:
+                historico_livros.append(Livro.dict_livro(h[0]), h[1])
+            usuario.historico_livros = historico_livros
+
+            self.usuarios.append(usuario)
 
     def salvar_usuarios(self):
         dados = []
         for u in self.usuarios:
-            dados.append(Usuario.usuario_dict(u))
+            livros_emprestados = []
+            for l in u.livros_emprestados:
+                livros_emprestados.append(l.livro_dict())
+
+            historico_livros = []
+            for h in u.historico_livros:
+                historico_livros.append(h[0].livro_dict(), str(h[1]))
+
+            dados.append({
+                "nome": u.nome,
+                "cpf": u.cpf,
+                "senha": u.senha,
+                "livros_emprestados": livros_emprestados,
+                "historico_livros": historico_livros
+            })
         Dados.salvar_dados("usuarios.json", dados)
 
     def carregar_livros(self):
