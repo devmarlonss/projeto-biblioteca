@@ -2,7 +2,6 @@ from biblioteca import Biblioteca
 from livro import Livro
 from usuario import Usuario
 from dados import Dados
-import usuario 
 
 def menu():
     biblioteca = Biblioteca()  
@@ -10,7 +9,7 @@ def menu():
     while True:
         print("""
         #========📚 Menu Principal 📚========#
-        1 - Adicionar Usuário
+        1 - Adicionar Usuário 
         2 - Remover Usuário
         3 - Buscar Usuário
         4 - Exibir Usuário
@@ -20,6 +19,7 @@ def menu():
         8 - Exibir Livros
         9 - Emprestar Livro
         10 - Devolver Livro
+        11 - Sair
         #====================================#
         """)
         
@@ -32,38 +32,74 @@ def menu():
             senha = input("Senha: ")
 
             resultado = biblioteca.adicionar_usuario(nome, cpf, senha)
-            if resultado is True:
-                print("Usuário cadastrado com sucesso!")
-            else:
-                print(f"{resultado}")
+            print(f"Usuário cadastrado com sucesso!" if resultado else resultado)
 
         elif opition == "2":
-            print("\n===📋 Cadastro de Livro 📋===")
+            print("\n===❌Remover Usuário❌===")
+            cpf = input("insira o CPF para a remoção do usuário: ")
+            resultado = biblioteca.remover_usuario(cpf)
+            print(f"Usuário removido com sucesso!" if resultado else "Não foi possível remover o usuário!")
+
+        elif opition == "3":
+            print("\n===🔎Buscar Usuário🔍===")
+            cpf = input("insira o CPF para buscar o usuário: ")
+            resultado = biblioteca.buscar_usuario(cpf)
+            if not resultado:
+                print("Usuário não encontrado!")
+            else:
+                print(f"nome: {resultado[0]} cpf: {resultado[1]}")
+
+        elif opition == "4":
+            print("\n===📑Exibir Usuários📑===")
+            biblioteca.exibir_usuarios()
+
+        elif opition == "5":
+            print("\n===📋 Adição de Livro 📋===")
             titulo = input("Título: ")
             ano = input("Ano: ")
             autor = input("Autor: ")
             genero = input("Gênero: ")
+            resultado = biblioteca.adicionar_livro(titulo, ano, autor, genero)
+            print("Livro adicionado com sucesso!" if resultado else resultado)
 
-            livro = Livro(titulo, ano, autor, genero)
-            biblioteca.livros.append(livro)
-            print("\n Livro cadastrado com sucesso!")
+        elif opition == "6":
+            print("\n===❌Remoção de Livro❌===")
+            titulo = input("insira o título para a remoção do livro: ")
+            resultado = biblioteca.remover_livro(titulo)
+            print(f"Livro removido com sucesso!" if resultado else "Não foi possível remover o Livro!")
 
-        elif opition == "3":
-            print("\n=== Lista de Usuários ===")
-            biblioteca.exibir_usuarios()
-
-        elif opition == "4":
-            print("\n===📕Lista de Livros📕===")
-            if biblioteca.livros:
-                for l in biblioteca.livros:
-                    print(f"Título: {l.titulo} | Autor: {l.autor} | Ano: {l.ano} | Gênero: {l.genero} | Disponível: {l.disponivel}")
+        elif opition == "7":
+            print("\n===🔎Buscar Usuário🔍===")
+            titulo = input("insira o título para buscar o livro: ")
+            resultado = biblioteca.buscar_livro(titulo)
+            if not resultado:
+                print("Livro não encontrado!")
             else:
-                print("\n Nenhum livro cadastrado!")
+                print(f"titulo: {resultado[0]} | autor: {resultado[1]} | ano: {resultado[2]} | genero: {resultado[3]} | disponivel: {resultado[4]}")
 
-        elif opition == "5":
+        elif opition == "8":
+            print("\n===📖Exibir Livros📖===")
+            biblioteca.exibir_livros()
+
+        elif opition == "9":
+            print("\n===📗Emprestar Livros📗===")
+            titulo = input("Informe o título do livro: ")
+            cpf = input("Informe o cpf:")
+            senha = input("Informe a senha:")
+            resultado = biblioteca.emprestar_livros(titulo, cpf, senha)
+            print(f"Livro emprestrado com sucesso!" if resultado else resultado)
+
+        elif opition == "10":
+            print("\n===📕Devolver Livro📕===")
+            titulo = input("Informe o título do livro: ")
+            cpf = input("Informe o cpf:")
+            senha = input("Informe a senha:")
+            resultado = biblioteca.devolver_livros(titulo, cpf, senha)
+            print(f"Livro devolvido com sucesso!" if resultado else resultado)
+        
+        elif opition == "11":
             print("Saindo do programa...")
             break
-
         else:
             print("Opção inválida! Tente novamente.")
 
