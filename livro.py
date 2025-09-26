@@ -29,3 +29,17 @@ class Livro:
     @disponivel.setter
     def disponivel(self, novo_disponivel):
         self.__disponivel = novo_disponivel
+
+    def livro_dict(self):
+        return {
+            "titulo": self.titulo,
+            "ano": self.ano,
+            "autor": self.autor,
+            "genero": self.genero,
+            "disponivel": self.disponivel
+        }
+    
+    @staticmethod
+    def dict_livro(livro):
+        """Método que transforma um dicionário em objeto"""
+        return Livro(livro["titulo"], livro["ano"], livro["autor"], livro["genero"], livro["disponivel"])

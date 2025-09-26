@@ -68,7 +68,8 @@ class Biblioteca:
         if (self.livros):
             for p, l in enumerate(self.livros):
                 print(f"{p+1} | Título: {l.titulo} | Autor: {l.autor} | Ano: {l.ano} | Gênero: {l.genero} | Disponível: {'Sim' if l.disponivel else 'Não'}")
-        print("\n Nenhum livro cadastrado!")
+        else:
+            print("\n Nenhum livro cadastrado!")
 
     def emprestar_livros(self, titulo, cpf, senha):
         livro = self.buscar_livro(titulo, obj=True)
