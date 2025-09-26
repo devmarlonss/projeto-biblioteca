@@ -71,9 +71,9 @@ class Biblioteca:
 
     def emprestar_livros(self, titulo, cpf, senha):
         livro = self.buscar_livro(titulo, obj=True)
-        usuario = self.buscar_usuario(cpf, obj=True)
         if livro.disponivel:
             if self.verificar_cpf(cpf):
+                usuario = self.buscar_usuario(cpf, obj=True)
                 if self.verificar_senha(usuario, senha):
                     usuario.livros_emprestados.append(livro)
                     usuario.hitorico_livros.append(livro)    
@@ -85,15 +85,23 @@ class Biblioteca:
 
     def devolver_livros(self, titulo, cpf, senha):
         livro = self.buscar_livro(titulo, obj=True)
-        usuario = self.buscar_usuario(cpf, obj=True)
         if self.verificar_cpf(cpf):
+            usuario = self.buscar_usuario(cpf, obj=True)
             if self.verificar_senha(usuario, senha):
                 usuario.livros_emprestados.remove(livro)   
                 livro.alterar_disponibilidade()
                 return True
-            return "Senha incorreta!"
-        return  "CPF inválido!"
-
+            return "Senha Incorreta!"
+        return  "CPF Inválido!"
+    
+    def ver_emprestimos(self, cpf):
+        if (self.verificar_cpf(cpf)):
+            usuario = self.buscar_usuario(cpf, obj=True)
+            print(f"USUÁRIO: {usuario.nome}")
+            for p, l in enumerate(usuario.livros_emprestados):
+                print(f"{p+1} - {l.titulo}")
+        return "CPF Inválido!"
+    
     @staticmethod
     def verificar_senha(usuario, senha):
         """Método que retorna se é a senha do usuário"""
