@@ -1,10 +1,9 @@
 from biblioteca import Biblioteca
-from livro import Livro
-from usuario import Usuario
-from dados import Dados
 
 def menu():
-    biblioteca = Biblioteca()  
+    biblioteca = Biblioteca()
+    biblioteca.carregar_usuarios()
+    biblioteca.carregar_livros()
 
     while True:
         print("""
