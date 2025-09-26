@@ -104,6 +104,10 @@ def menu():
             cpf = input("Informe o CPF: ")
             biblioteca.ver_emprestimos(cpf)
 
+        elif option == "12":
+            print("\n===📚Históricos de Livros📚===")
+            cpf = input("Informe o CPF: ")
+            biblioteca.ver_historico(cpf)
         
         elif option == "13":
             print("Saindo do programa...")
