@@ -34,13 +34,13 @@ def menu():
             senha = input("Senha: ")
 
             resultado = biblioteca.adicionar_usuario(nome, cpf, senha)
-            print(f"Usuário cadastrado com sucesso!" if resultado else resultado)
+            print(f"Usuário cadastrado com sucesso!" if resultado == True else resultado)
 
         elif option == "2":
             print("\n===❌Remover Usuário❌===")
             cpf = input("insira o CPF para a remoção do usuário: ")
             resultado = biblioteca.remover_usuario(cpf)
-            print(f"Usuário removido com sucesso!" if resultado else "Não foi possível remover o usuário!")
+            print(f"Usuário removido com sucesso!" if resultado == True else "Não foi possível remover o usuário!")
 
         elif option == "3":
             print("\n===🔎Buscar Usuário🔍===")
@@ -62,13 +62,13 @@ def menu():
             autor = input("Autor: ")
             genero = input("Gênero: ")
             resultado = biblioteca.adicionar_livro(titulo, ano, autor, genero)
-            print("Livro adicionado com sucesso!" if resultado else resultado)
+            print("Livro adicionado com sucesso!" if resultado == True else resultado)
 
         elif option == "6":
             print("\n===❌Remoção de Livro❌===")
             titulo = input("insira o título para a remoção do livro: ")
             resultado = biblioteca.remover_livro(titulo)
-            print(f"Livro removido com sucesso!" if resultado else "Não foi possível remover o Livro!")
+            print(f"Livro removido com sucesso!" if resultado == True else "Não foi possível remover o Livro!")
 
         elif option == "7":
             print("\n===🔎Buscar Usuário🔍===")
@@ -89,7 +89,7 @@ def menu():
             cpf = input("Informe o cpf:")
             senha = input("Informe a senha:")
             resultado = biblioteca.emprestar_livros(titulo, cpf, senha)
-            print(f"Livro emprestrado com sucesso!" if resultado else resultado)
+            print(f"Livro emprestrado com sucesso!" if resultado == True else resultado)
 
         elif option == "10":
             print("\n===📕Devolver Livro📕===")
@@ -97,17 +97,19 @@ def menu():
             cpf = input("Informe o CPF: ")
             senha = input("Informe a senha:")
             resultado = biblioteca.devolver_livros(titulo, cpf, senha)
-            print(f"Livro devolvido com sucesso!" if resultado else resultado)
+            print(f"Livro devolvido com sucesso!" if resultado == True else resultado)
 
         elif option == "11":
             print("\n===📚Livros Emprestados📚===")
             cpf = input("Informe o CPF: ")
-            biblioteca.ver_emprestimos(cpf)
+            resultado = biblioteca.ver_emprestimos(cpf)
+            print(f"\n" if resultado == True else resultado)
 
         elif option == "12":
             print("\n===📚Históricos de Livros📚===")
             cpf = input("Informe o CPF: ")
-            biblioteca.ver_historico(cpf)
+            resultado = biblioteca.ver_historico(cpf)
+            print(f"\n" if resultado == True else resultado)
         
         elif option == "13":
             print("Saindo do programa...")

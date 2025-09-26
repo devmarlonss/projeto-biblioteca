@@ -26,5 +26,6 @@ class Livro:
     def disponivel(self):
         return self.__disponivel
     
-    def alterar_disponibilidade(self):
-        self.disponivel = not self.disponivel
+    @disponivel.setter
+    def disponivel(self, novo_disponivel):
+        self.__disponivel = novo_disponivel

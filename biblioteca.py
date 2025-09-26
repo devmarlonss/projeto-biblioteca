@@ -23,7 +23,7 @@ class Biblioteca:
                 return True
         return False
 
-    def buscar_usuario(self, cpf, show=True, obj= False):
+    def buscar_usuario(self, cpf, show=True, obj=False):
         for u in self.usuarios:
             if (u.cpf == cpf):
                 if (obj):
@@ -38,7 +38,7 @@ class Biblioteca:
             for p, u in enumerate(self.usuarios):
                 print(f"{p+1} | Nome: {u.nome} | CPF: {u.cpf}\n")
         else:
-            print("\n Nenhum livro cadastrado!")
+            print("\n Nenhum usuário cadastrado!")
 
     def adicionar_livro(self, titulo, autor, ano, genero):
         if (not self.buscar_livro(titulo, show=False)):
@@ -72,43 +72,61 @@ class Biblioteca:
 
     def emprestar_livros(self, titulo, cpf, senha):
         livro = self.buscar_livro(titulo, obj=True)
-        if livro.disponivel:
-            if self.verificar_cpf(cpf):
-                usuario = self.buscar_usuario(cpf, obj=True)
-                if self.verificar_senha(usuario, senha):
-                    usuario.livros_emprestados.append(livro)
-                    usuario.hitorico_livros.append([livro, date.now()])    
-                    livro.alterar_disponibilidade()
-                    return True
-                return "Senha incorreta!"
-            return  "CPF inválido!"
-        return "Livro indisponível!"
+        if (livro):
+            if livro.disponivel:
+                if self.verificar_cpf(cpf):
+                    usuario = self.buscar_usuario(cpf, obj=True)
+                    if (usuario):
+                        if self.verificar_senha(usuario, senha):
+                            usuario.livros_emprestados.append(livro)
+                            usuario.historico_livros.append([livro, date.today()])    
+                            livro.disponivel = False
+                            return True
+                        return "Senha incorreta!"
+                    return "Usuário não encontrado!"
+                return  "CPF inválido!"
+            return "Livro indisponível!"
+        return "Livro não encontrado!"
 
     def devolver_livros(self, titulo, cpf, senha):
         livro = self.buscar_livro(titulo, obj=True)
-        if self.verificar_cpf(cpf):
-            usuario = self.buscar_usuario(cpf, obj=True)
-            if self.verificar_senha(usuario, senha):
-                usuario.livros_emprestados.remove(livro)   
-                livro.alterar_disponibilidade()
-                return True
-            return "Senha Incorreta!"
-        return  "CPF Inválido!"
+        if (livro):
+            if self.verificar_cpf(cpf):
+                usuario = self.buscar_usuario(cpf, obj=True)
+                if self.verificar_senha(usuario, senha):
+                    if livro in usuario.livros_emprestados:
+                        usuario.livros_emprestados.remove(livro)   
+                        livro.disponivel = True
+                        return True
+                    return "Usuário não tem empréstimo do livro!"
+                return "Senha Incorreta!"
+            return  "CPF Inválido!"
+        return "Livro não encontrado"
     
     def ver_emprestimos(self, cpf):
         if (self.verificar_cpf(cpf)):
             usuario = self.buscar_usuario(cpf, obj=True)
-            print(f"USUÁRIO: {usuario.nome}")
-            for p, l in enumerate(usuario.livros_emprestados):
-                print(f"{p+1} - {l.titulo}")
+            if (usuario):
+                print(f"USUÁRIO: {usuario.nome}")
+                if (usuario.livros_emprestados):
+                    for p, l in enumerate(usuario.livros_emprestados):
+                        print(f"{p+1} - {l.titulo}")
+                    return True
+                return "Não há empréstimos!"
+            return "Usuário não encontrado!"
         return "CPF Inválido!"
     
     def ver_historico(self, cpf):
         if (self.verificar_cpf(cpf)):
             usuario = self.buscar_usuario(cpf, obj=True)
-            print(f"USUÁRIO: {usuario.nome}")
-            for p, l in enumerate(usuario.historico_livros):
-                print(f"{p+1}° - {l[0].titulo} - {l[1]}")
+            if (usuario):
+                print(f"USUÁRIO: {usuario.nome}")
+                if (usuario.historico_livros):
+                    for p, l in enumerate(usuario.historico_livros):
+                        print(f"{p+1} | Título: {l[0].titulo} | Data: {l[1]}")
+                    return True
+                return "Histórico vazio!"
+            return "Usuário não encontrado!"
         return "CPF Inválido!"
     
     @staticmethod
