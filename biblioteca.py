@@ -134,6 +134,12 @@ class Biblioteca:
         usuarios = Dados.carregar_dados("usuarios.json")
         for u in usuarios:
             self.usuarios.append(Usuario.dict_usuario(u))
+
+    def salvar_livros(self):
+        dados = []
+        for l in self.livros:
+            dados.append(Livro.livro_dict(l))
+        Dados.salvar_dados("livros.json", dados)
     
     @staticmethod
     def verificar_senha(usuario, senha):
