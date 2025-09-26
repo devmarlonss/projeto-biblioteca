@@ -130,6 +130,11 @@ class Biblioteca:
             return "Usuário não encontrado!"
         return "CPF Inválido!"
     
+    def carregar_usuarios(self):
+        usuarios = Dados.carregar_dados("usuarios.json")
+        for u in usuarios:
+            self.usuarios.append(Usuario.dict_usuario(u))
+    
     @staticmethod
     def verificar_senha(usuario, senha):
         """Método que retorna se é a senha do usuário"""
