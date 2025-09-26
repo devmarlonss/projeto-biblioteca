@@ -135,11 +135,11 @@ class Biblioteca:
         for u in usuarios:
             self.usuarios.append(Usuario.dict_usuario(u))
 
-    def salvar_livros(self):
+    def salvar_usuarios(self):
         dados = []
-        for l in self.livros:
-            dados.append(Livro.livro_dict(l))
-        Dados.salvar_dados("livros.json", dados)
+        for u in self.usuarios:
+            dados.append(Usuario.usuario_dict(u))
+        Dados.salvar_dados("usuarios.json", dados)
 
     def carregar_livros(self):
         livros = Dados.carregar_dados("livros.json")
