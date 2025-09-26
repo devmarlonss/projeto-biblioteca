@@ -20,7 +20,7 @@ def menu():
         9 - Emprestar Livro
         10 - Devolver Livro
         11 - Ver livros emprestados ao usuário      
-        12 - Ver histórico do usuário
+        12 - Ver histórico de livros do usuário
         13 - Sair
         #====================================#
         """)

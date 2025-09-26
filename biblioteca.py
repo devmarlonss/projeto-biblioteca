@@ -25,7 +25,7 @@ class Biblioteca:
     def buscar_usuario(self, cpf, show=True, obj= False):
         for u in self.usuarios:
             if (u.cpf == cpf):
-                if obj:
+                if (obj):
                     return u
                 if (show):
                     return (u.nome, u.cpf)
@@ -34,8 +34,8 @@ class Biblioteca:
 
     def exibir_usuarios(self):
         if (self.usuarios):
-            for u in self.usuarios:
-                print(f"Nome: {u.nome}\nCPF: {u.cpf}\n")
+            for p, u in enumerate(self.usuarios):
+                print(f"{p+1} | Nome: {u.nome} | CPF: {u.cpf}\n")
         else:
             print("\n Nenhum livro cadastrado!")
 
@@ -56,7 +56,7 @@ class Biblioteca:
     def buscar_livro(self, titulo, show=True, obj=False):
         for l in self.livros:
             if (l.titulo == titulo):
-                if obj:
+                if (obj):
                     return l
                 if (show):
                     return (l.titulo, l.autor, l.ano, l.genero, l.disponivel)
@@ -65,8 +65,8 @@ class Biblioteca:
     
     def exibir_livros(self):
         if (self.livros):
-            for l in self.livros:
-                print(f"Título: {l.titulo} | Autor: {l.autor} | Ano: {l.ano} | Gênero: {l.genero} | Disponível: {'Sim' if l.disponivel else 'Não'}")
+            for p, l in enumerate(self.livros):
+                print(f"{p+1} | Título: {l.titulo} | Autor: {l.autor} | Ano: {l.ano} | Gênero: {l.genero} | Disponível: {'Sim' if l.disponivel else 'Não'}")
         print("\n Nenhum livro cadastrado!")
 
     def emprestar_livros(self, titulo, cpf, senha):
@@ -96,9 +96,10 @@ class Biblioteca:
 
     @staticmethod
     def verificar_senha(usuario, senha):
+        """Método que retorna se é a senha do usuário"""
         return usuario.senha == senha
     
     @staticmethod
     def verificar_cpf(cpf):
-        """Verifica se o CPF é válido"""
+        """Método que retorna se o CPF é válido"""
         return (cpf.isdigit() and len(cpf) == 11)
