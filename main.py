@@ -10,18 +10,23 @@ def menu():
     while True:
         print("""
         #========📚 Menu Principal 📚========#
-        1 - Cadastrar Usuário
-        2 - Cadastrar Livro
-        3 - Listar Usuários
-        4 - Listar Livros
-        5 - Sair
-        #=====================================#
+        1 - Adicionar Usuário
+        2 - Remover Usuário
+        3 - Buscar Usuário
+        4 - Exibir Usuário
+        5 - Adicionar Livro
+        6 - Remover Livro
+        7 - Buscar Livro
+        8 - Exibir Livros
+        9 - Emprestar Livro
+        10 - Devolver Livro
+        #====================================#
         """)
         
         opition = input("Escolha uma opção no menu acima: ")
 
         if opition == "1":
-            print("\n===📋 Cadastro de Usuário 📋===")
+            print("\n===📋 Adição de Usuário 📋===")
             nome = input("Nome: ")
             cpf = input("CPF (apenas números): ")
             senha = input("Senha: ")
@@ -63,4 +68,5 @@ def menu():
             print("Opção inválida! Tente novamente.")
 
 if __name__ == "__main__":
+
     menu()
